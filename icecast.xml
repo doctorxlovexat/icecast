@@ -1,0 +1,62 @@
+<icecast>
+    <location>Nemačka</location>
+    <admin>angeldobric@gmail.com</admin>
+    <hostname>127.0.0.1</hostname>
+
+    <limits>
+        <clients>100</clients>
+        <sources>2</sources>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65535</burst-size>
+    </limits>
+
+    <authentication>
+        <source-password>zizu</source-password>
+        <relay-password>zizu</relay-password>
+        <admin-user>gladijator</admin-user> <!-- Ispravljeno ime admin korisnika -->
+        <admin-password>zizu</admin-password>
+    </authentication>
+
+    <listen-socket>
+        <port>8000</port>
+    </listen-socket>
+
+    <http-headers>
+        <header name="Access-Control-Allow-Origin" value="*"/>
+    </http-headers>
+
+    <mount>
+        <mount-name>/x1</mount-name>
+        <password>zizu</password>
+    </mount>
+
+    <mount>
+        <mount-name>/x2</mount-name>
+        <password>zizu</password>
+    </mount>
+
+    <mount>
+        <mount-name>/x3</mount-name>
+        <password>zizu</password>
+    </mount>
+
+    <fileserve>1</fileserve>
+
+    <paths>
+        <logdir>./log</logdir>
+        <webroot>./web</webroot>
+        <adminroot>./admin</adminroot>
+        <alias source="/" destination="/status.xsl"/>
+    </paths>
+
+    <logging>
+        <accesslog>access.log</accesslog>
+        <errorlog>error.log</errorlog>
+        <loglevel>3</loglevel>
+        <logsize>10000</logsize>
+    </logging>
+</icecast>

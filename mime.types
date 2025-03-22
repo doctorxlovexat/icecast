@@ -1,0 +1,7 @@
+# mime.types file for Icecast
+audio/mpeg mp3
+audio/ogg ogg
+audio/vorbis ogg
+audio/aac aac
+video/ogg ogv
+video/mp4 mp4
