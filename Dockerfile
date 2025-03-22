@@ -1,35 +1,37 @@
-# Koristi zvaničnu Alpine sliku sa najnovijom verzijom Icecast
 FROM alpine:latest
 
-# Instaliraj potrebne pakete za Icecast
+# Instaliraj potrebne pakete
 RUN apk add --no-cache \
     icecast \
     bash \
     curl \
     libxml2 \
     libxslt \
-    shadow  # Instaliraj shadow paket za kreiranje korisnika i grupa
+    shadow  # Paket koji sadrži addgroup i adduser komande
 
-# Kreiraj grupu i korisnika za Icecast (bez root privilegija)
+# Kreiraj simbolički link za sh u /bin (ako nije već tamo)
+RUN ln -s /bin/sh /usr/bin/sh
+
+# Kreiraj grupu i korisnika
 RUN addgroup -S icecast && adduser -S icecast -G icecast
 
-# Kopiraj tvoj config fajl u odgovarajući direktorijum
+# Kopiraj config fajl u odgovarajući direktorijum
 COPY icecast.xml /etc/icecast/
 
 # Napraviti direktorijum za logove i web root
 RUN mkdir -p /var/log/icecast /var/www/icecast
 
-# Kopiraj sve potrebne fajlove (webroot, log dir, itd.) u odgovarajuće direktorijume
+# Kopiraj potrebne fajlove u odgovarajuće direktorijume
 COPY ./web /var/www/icecast
 COPY ./log /var/log/icecast
 
-# Postavite vlasnika fajlova na korisnika 'icecast'
+# Promeni vlasništvo fajlova na icecast korisnika i grupu
 RUN chown -R icecast:icecast /etc/icecast /var/log/icecast /var/www/icecast
 
-# Izlaganje porta koji Icecast koristi (npr. 8000)
+# Izlaganje porta koji Icecast koristi
 EXPOSE 8000
 
-# Postavite korisnika koji će pokrenuti Icecast
+# Pokreni Icecast sa nižim privilegijama
 USER icecast
 
 # Komanda koja pokreće Icecast server
