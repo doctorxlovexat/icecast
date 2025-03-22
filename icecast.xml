@@ -60,9 +60,12 @@
         <logsize>10000</logsize>
     </logging>
 
-    <changeowner>
-        <file>./</file> <!-- Odnosimo se na korenski direktorijum unutar kontejnera -->
-        <user>icecast</user> <!-- Korisnik u kontejneru -->
-        <group>icecast</group> <!-- Grupa unutar kontejnera -->
-    </changeowner>
+    <!-- Dodato unutar sekcije <security> -->
+    <security>
+        <changeowner>
+            <file>./</file> <!-- Odnosimo se na korenski direktorijum unutar kontejnera -->
+            <user>icecast</user> <!-- Korisnik u kontejneru -->
+            <group>icecast</group> <!-- Grupa unutar kontejnera -->
+        </changeowner>
+    </security>
 </icecast>
