@@ -15,8 +15,12 @@ COPY icecast.xml /etc/icecast/
 # Napraviti direktorijum za logove i web root
 RUN mkdir -p /var/log/icecast /var/www/icecast
 
+# Kopiraj sve potrebne fajlove (webroot, log dir, itd.) u odgovarajuće direktorijume
+COPY ./web /var/www/icecast
+COPY ./log /var/log/icecast
+
 # Izlaganje porta koji Icecast koristi (npr. 8000)
 EXPOSE 8000
 
-# Komanda koja pokreće Icecast
+# Komanda koja pokreće Icecast server
 CMD ["icecast", "-c", "/etc/icecast/icecast.xml"]
